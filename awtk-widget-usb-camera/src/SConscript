@@ -15,7 +15,7 @@ DEVICE_TYPE = 'v4l2'
 # v4l 协议已经是被抛弃的协议，可能会出现系统不兼容的问题，不建议使用。
 #DEVICE_TYPE = 'v4l'
 
-if OS_NAME == 'Windows':
+if OS_NAME == 'Windows' and os.environ['TOOLS_NAME'] == '':
   SOURCES += Glob('usb_camera/devices/usb_camera_window_device.cpp')
 elif OS_NAME == 'Linux':
   if DEVICE_TYPE == 'v4l2':
@@ -24,7 +24,7 @@ elif OS_NAME == 'Linux':
     SOURCES += Glob('usb_camera/devices/usb_camera_linux_device_v4l.cpp')
 
 EXPORT_DEF=''
-if OS_NAME == 'Windows':
+if OS_NAME == 'Windows' and os.environ['TOOLS_NAME'] == '':
   EXPORT_DEF = ' /DEF:"src/usb_camera.def" '
 
 if 'BUILD_SHARED' in os.environ and os.environ['BUILD_SHARED'] == 'True':
